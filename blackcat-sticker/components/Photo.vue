@@ -16,9 +16,12 @@ export default {
 
 <style scoped>
 .photo{
-    width: 90%;
-    background: white;
-    border: 1px solid orange;
-    border-radius: 4px;
+    width: 93%;
+    margin: 20px 3%;
+}
+img{
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
 }
 </style>

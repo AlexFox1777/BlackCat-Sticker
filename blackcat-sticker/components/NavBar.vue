@@ -19,6 +19,7 @@ export default {
     background: #181743;
     color: white;
     height: 250px;
+    min-width: 200px;
     position: absolute;
     width: 100%;
     left: 0;

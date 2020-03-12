@@ -59,5 +59,19 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+body{
+  min-width: 200px;
+}
+
+h4{
+  font-weight: normal;
+}
 </style>
 

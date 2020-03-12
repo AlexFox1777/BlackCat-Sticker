@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <Photo ></Photo>
-    <Filters ></Filters>
+    <Photo class="f-item1"></Photo>
+    <Filters class="f-item2"></Filters>
   </section>
 </template>
 
@@ -16,23 +16,32 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" >
+$breakpoint-tablet: 768px;
+
+@media (max-width: $breakpoint-tablet) {
+  .f-item1{
+    order: 1
+  }
+  .container{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: $breakpoint-tablet){
+  .container{
+    align-items: flex-start;
+  }
+}
+
 .container {
+  margin-top: 70px;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
-.container:nth-child(1){
-  order: 2;
-}
-.container:nth-child(2){
-  order: 1;
-}
-h4{
-  font-weight: normal;
-}
+
 </style>
 
