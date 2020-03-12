@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss" >
 .form{
     display: flex;
     flex-direction: column;
@@ -46,6 +46,9 @@ export default {
     border: 1px solid #2dca6f;
     outline: none;
     margin-bottom: 20px;
+    &:hover {
+        border: 1.5px solid #1edf6e;
+    }
 }
 .label{
     margin-bottom: 10px;

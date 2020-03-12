@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss" >
 .form{
     text-align: left;
     margin-top: 10px;
@@ -45,6 +45,9 @@ export default {
     font: inherit;
     cursor: pointer;
     outline: none;
+    &:hover {
+        background:rgb(177, 48, 155);
+    }
 }
 .field::after{
     content: '+';
