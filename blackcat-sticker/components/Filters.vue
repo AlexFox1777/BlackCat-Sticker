@@ -32,9 +32,12 @@ export default {
 <style scoped>
 .filters{
     padding: 20px 5%;
-    width: 90%;
+    width: 93%;
+    margin: 20px 3%;
     background: white;
     border: 1px solid orange;
-    border-radius: 4px;
+    border-radius: 15px;
+    min-width: 200px;
+    
 }
 </style>
