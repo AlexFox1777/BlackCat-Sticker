@@ -1,5 +1,16 @@
 <template>
 <div class="sticker">
+    <div class="row">
+        <!-- Sticker move component -->
+        <div class="movements">
+            d
+        </div>
+        <!-- Sticker list component -->
+        <div class="sticker-list">
+            <img v-for="(cat, index) in cats"  :src="cat" :key="index" />
+        </div>
+    </div>
+    <!-- Opacity component -->
     <div class="slider-container">
         <h4>Image Opacity</h4>
         <div class="slider">
@@ -14,6 +25,7 @@ export default {
 data(){
     return{
         imgOpacity: 0.8,
+        cats: ['/favicon.ico', '/favicon.ico', '/favicon.ico' ,'/favicon.ico']
     }
 }
 }
@@ -43,5 +55,24 @@ data(){
     width: 25px;
     height: 25px;
     border-radius: 50%;
+}
+// sticker list styles 
+.sticker-list{
+    border: 1px solid coral;
+    border-radius: 4px;
+    width: 75%;
+
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+// movements styles 
+.movements{
+    width: 20%;
+    border: 1px solid coral;
+    border-radius: 4px;
 }
 </style>

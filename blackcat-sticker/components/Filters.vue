@@ -1,7 +1,7 @@
 <template>
 <div class="filters">
     <LineBreaker :label="imgText"></LineBreaker>
-    <Loader></Loader>
+    <Loader @click="openModal"></Loader>
     <LineBreaker :label="stickerText"></LineBreaker>
     <StickerPicker></StickerPicker>
     <LineBreaker :label="labelText"></LineBreaker>
@@ -19,15 +19,15 @@ export default {
         Loader,
         LineBreaker,
         LabelPicker,
-        StickerPicker
+        StickerPicker,
     },
     data(){
         return{
             imgText: "Choose a picture",
             stickerText: 'Pick a sticker',
-            labelText: 'Choose a label'
+            labelText: 'Choose a label',
         }
-    }
+    },
 }
 </script>
 
