@@ -1,9 +1,9 @@
 <template>
 <div class="filters">
     <LineBreaker :label="imgText"></LineBreaker>
-    <Loader></Loader>
+    <Loader @click="openModal"></Loader>
     <LineBreaker :label="stickerText"></LineBreaker>
-    blabla
+    <StickerPicker></StickerPicker>
     <LineBreaker :label="labelText"></LineBreaker>
     <LabelPicker></LabelPicker>
 </div>
@@ -13,19 +13,21 @@
 import Loader from './Loader'
 import LineBreaker from './LineBreaker'
 import LabelPicker from './LabelPicker'
+import StickerPicker from './StickerPicker'
 export default {
     components: {
         Loader,
         LineBreaker,
-        LabelPicker
+        LabelPicker,
+        StickerPicker,
     },
     data(){
         return{
             imgText: "Choose a picture",
             stickerText: 'Pick a sticker',
-            labelText: 'Choose a label'
+            labelText: 'Choose a label',
         }
-    }
+    },
 }
 </script>
 

@@ -12,16 +12,20 @@ props:{
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .label{
-    background: orange;
+    background: coral;
     padding: 8px 10px;
-    margin: 0 2px;
+    margin: 0 10px 10px 0;
     border: none;
     border-radius: 20px;
     text-transform: uppercase;
     cursor: pointer;
     outline: none;
     white-space: nowrap;
+    &:hover{
+        background: rgb(255, 97, 40);
+        color: rgb(255, 255, 255);
+    }
 }
 </style>

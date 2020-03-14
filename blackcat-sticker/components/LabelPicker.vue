@@ -1,8 +1,8 @@
 <template>
   <div>
-      <form class="form">
+      <form class="form" @submit.prevent>
           <label for="label" class="label">Label name</label>
-          <input type="text" id="label" class="field"/>
+          <input type="text" id="label" class="field" v-model="labelText" @change="sendLabel"/>
           <h4 class="label">Label color</h4>
           <div class="row">
               <LabelBtn v-for="(color, index) in colors" :label="color" :key="index"></LabelBtn>
@@ -18,13 +18,19 @@
 </template>
 
 <script>
-    import Label from './Label'
+import Label from './Label'
 export default {
     components: {
         LabelBtn: Label
     },
+    methods: {
+        sendLabel(){
+            this.$store.commit('label/sendLabel', this.labelText)
+        }
+    },
     data(){
         return{
+            labelText: "Bo",
             colors: ['White', 'Black'],
             fonts: ['Alegreya SC', 'Anton', 'Bigelow Rules', 'Cormorant Garamond', 'IM Fell English', 'Londrina Shadow', 'Megrim']
         }
@@ -32,7 +38,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss" >
 .form{
     display: flex;
     flex-direction: column;
@@ -46,6 +52,9 @@ export default {
     border: 1px solid #2dca6f;
     outline: none;
     margin-bottom: 20px;
+    &:hover {
+        border: 1.5px solid #1edf6e;
+    }
 }
 .label{
     margin-bottom: 10px;

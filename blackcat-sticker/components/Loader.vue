@@ -9,31 +9,38 @@
               class="field" >
                  upload image
             </label>
-      </form>
+      </form> 
+      <Modal v-if="modalActive"></Modal>
   </div>
 </template>
 
 <script>
+import Modal from './Modal'
 export default {
+    components:{
+        Modal,
+    },
+    data(){
+        return{
+            modalActive: false
+        }
+    },
     methods: {
         handleFile(e){
             console.log('file ', e.target.files)
             let imgSrc = URL.createObjectURL(event.target.files[0]);
             this.$store.commit('image/handleSrc', imgSrc)
+            this.modalActive = true
         }
     },
-    computed: {
-        getSrc(){
-            return this.$store.state.image.imgSrc
-        }
-    }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss" >
 .form{
     text-align: left;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 .field{
     padding: 10px 3%;
@@ -45,6 +52,9 @@ export default {
     font: inherit;
     cursor: pointer;
     outline: none;
+    &:hover {
+        background:rgb(177, 48, 155);
+    }
 }
 .field::after{
     content: '+';
