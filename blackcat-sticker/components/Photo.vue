@@ -1,67 +1,79 @@
 <template>
-  <div class="photo">
+  <div class="photo-root">
     <img :src="getSrc" class="img"/>
-    <div class="canvas" @dragover="allowDrop" @drop="drop" id="labelbox">
-      <p id="labeltarget"
-       :style="{position: 'absolute', left: getX, top: getY}"
-       @mousedown="down"
-       draggable="true">
-        {{ getLabel }}
-        </p>
+    
+    <div class="canvas" id="labelbox" @mousemove="move">
+      <p v-for="(label, i) in getLabels"
+       :key="i"
+       :id="'labeltarget_' + i"
+       class="canvas-element"
+       :style="{ left: label.x, top: label.y}"
+       @mousedown="down(i)"
+       @mouseup="up">
+        {{ label.labelText }}
+      </p>
     </div>
+
   </div>
 </template>
 
 <script>
 export default {
+    data(){
+      return{
+        allowMove: false,
+      }
+    },
     computed: {
+        getLabels(){
+          return this.$store.state.label.labels
+        },
         getSrc(){
-            return this.$store.state.image.croppedImg
+          return this.$store.state.image.croppedImg
         },
-        getLabel(){
-          return this.$store.state.label.labelText
-        },
-        getX(){
-          return this.$store.state.label.x
-        },
-        getY(){
-          return this.$store.state.label.y
-        }
     },
     methods:{
-      dragStart(e){
-        e.dataTransfer.setData('Label', e.target.id)
-      },
-      allowDrop(e){
-        e.preventDefault()
-      },
-      moveAt(e, pageX, pageY){
+      getBoundaries(element){
         let labelElement = document.getElementById('labelbox').getBoundingClientRect()
-        let shiftX = e.clientX - labelElement.left;
-        let shiftY = e.clientY - labelElement.top;
-        const coords = {
-          x: shiftX + 'px',
-          y: shiftY + 'px'
+        let label = document.getElementById(element).getBoundingClientRect()
+        return {
+          right: labelElement.width - label.width,
+          left: 0,
+          top: labelElement.height - label.height,
+          bottom: 0,
         }
-        this.$store.commit('label/sendXYLabel', coords)
       },
-      move(e){
-         this.moveAt(e.pageX, e.pageY)  
-      },
-      down(e){
-        let labelElement = document.getElementById('labelbox').getBoundingClientRect()
-        let shiftX = e.clientX - labelElement.left;
-        let shiftY = e.clientY - labelElement.top;
-        console.log('clientX ', e.clientX, '; clientY ', e.clientY)
-        console.log('shiftX ', shiftX ,'; shiftY ', shiftY)
-        console.log('pageX ', e.pageX, '; pageY ', e.pageY)
-        const coords = {
-          x: shiftX + 'px',
-          y: shiftY  + 'px'
+      respectBoundaries(e, element){
+          if(this.allowMove){
+          let labelElement = document.getElementById('labelbox').getBoundingClientRect()
+          let label = document.getElementById(element).getBoundingClientRect()
+          let shiftX = e.clientX - labelElement.left - (label.width / 2)
+          let shiftY = e.clientY - labelElement.top - (label.height / 2)
+          const boundaries = this.getBoundaries(element)
+          if(shiftX < boundaries.right 
+          && shiftX > boundaries.left
+          && shiftY < boundaries.top
+          && shiftY > boundaries.bottom){
+            const coords = {
+            index: element.split('_')[1],
+            x: shiftX + 'px',
+            y: shiftY  + 'px'
+            }
+            this.$store.commit('label/sendXYLabel', coords)
+          }else{
+            this.allowMove = false
+          }
         }
-        this.$store.commit('label/sendXYLabel', coords)
-        document.addEventListener('mousemove', this.move);
-
+      },
+      move(){
+        this.respectBoundaries(event, event.target.attributes.id.value)
+      },
+      down(i){
+        this.respectBoundaries(event, `labeltarget${i}`)
+        this.allowMove = true
+      },
+      up(e){
+        this.allowMove = false
       }
     }
 }
@@ -72,7 +84,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.photo{
+.photo-root{
     width: 93%;
     margin: 20px 3%;
     position: relative;
@@ -87,5 +99,10 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+.canvas-element{
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
 }
 </style>
