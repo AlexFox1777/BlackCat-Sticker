@@ -10,7 +10,7 @@
                  upload image
             </label>
       </form> 
-      <Modal v-if="modalActive"></Modal>
+      <Modal :modal-state="modalActive" @disable-modal="modalDisabled"></Modal>
   </div>
 </template>
 
@@ -21,16 +21,19 @@ export default {
         Modal,
     },
     computed: {
-         getSrc(){
+        getSrc(){
             return this.$store.state.image.imgSrc
         }
     },
     data(){
         return{
-            modalActive: false
+            modalActive: false,
         }
     },
     methods: {
+        modalDisabled(){
+            this.modalActive = false
+        },
         handleFile(e){
             let imgSrc = URL.createObjectURL(event.target.files[0]);
             this.$store.commit('image/handleSrc', imgSrc)
