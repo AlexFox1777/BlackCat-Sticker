@@ -2,9 +2,9 @@
     <div> 
         <div class="modal">
             <h4 class="title">↓Crop your image↓</h4>
-            <img :src="getSrc" class="img" ref="image" />
+            <img :src="getSrc" class="img" ref="image" @change="setupCropper"/>
         </div>
-         <button @click="sendImg" class="btn">Submit</button>
+        <button @click="sendImg" class="btn">Submit</button>
     </div>
 </template>
 
@@ -21,26 +21,33 @@ export default {
             cropper: {},
             destination: {},
             canvas: {},
-            image: {}
+            image: {},
         }
     },
-    methods:{
+    methods: {
         sendImg(){
             this.$store.commit('image/sendCroppedImg', this.destination)
-        }
+        },
+        setupCropper(){
+            this.image = this.$refs.image
+            this.cropper = new Cropper(this.image, {
+                zoomable: false,
+                scalable: false,
+                minCropBoxWidth: 50,
+                aspectRatio: 1,
+                crop: () => {
+                    const canvas = this.cropper.getCroppedCanvas();
+                    this.destination = canvas.toDataURL("image/png");
+                },
+            })
+        },  
     },
     mounted(){
-        this.image = this.$refs.image
-        this.cropper = new Cropper(this.image, {
-            zoomable: false,
-            scalable: false,
-            minCropBoxWidth: 50,
-            aspectRatio: 1,
-            crop: () => {
-                const canvas = this.cropper.getCroppedCanvas();
-                this.destination = canvas.toDataURL("image/png");
-            }
-        })
+        this.setupCropper()
+    },
+    updated(){
+        this.cropper.destroy()
+        this.setupCropper()
     }
 }
 </script>

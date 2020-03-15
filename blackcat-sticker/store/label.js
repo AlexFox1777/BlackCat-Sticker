@@ -1,20 +1,16 @@
 
 export const state = () =>({
-    labelText: "Bobo",
-    labelFont: 'Montserrat',
-    x: 0,
-    y: 0,
+    labels: [],
 })
 
 export const mutations = {
     sendLabel(state, data){
-        state.labelText = data
-    },
-    sendFont(state, font){
-        state.labelFont = font
+        state.labels.push(data)
     },
     sendXYLabel(state, data){
-        state.x = data.x
-        state.y = data.y
+        const index = data.index
+        const label_obj = state.labels[index]
+        label_obj.x = data.x
+        label_obj.y = data.y
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form class="form">
+      <form class="form" @submit.prevent>
             <input id="loader" name="loader"
              type="file" @change="handleFile"
              accept="image/png, image/jpeg"
@@ -20,6 +20,11 @@ export default {
     components:{
         Modal,
     },
+    computed: {
+         getSrc(){
+            return this.$store.state.image.imgSrc
+        }
+    },
     data(){
         return{
             modalActive: false
@@ -27,11 +32,10 @@ export default {
     },
     methods: {
         handleFile(e){
-            console.log('file ', e.target.files)
             let imgSrc = URL.createObjectURL(event.target.files[0]);
             this.$store.commit('image/handleSrc', imgSrc)
             this.modalActive = true
-        }
+        },
     },
 }
 </script>

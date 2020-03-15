@@ -25,7 +25,13 @@ export default {
     },
     methods: {
         sendLabel(){
-            this.$store.commit('label/sendLabel', this.labelText)
+            let label = {
+                labelText: this.labelText,
+                labelFont: 'Montserrat',
+                x: 0,
+                y: 0,
+            }
+            this.$store.commit('label/sendLabel', label)
         }
     },
     data(){
