@@ -1,6 +1,7 @@
 <template>
   <div>
       <form class="form" @submit.prevent>
+          <h4 class="label">Label name</h4>
           <div class="settings">      
             <input type="text" id="label" class="field" v-model="labelText"/>
             <button class="settings-btn" @click="sendLabel">Add</button>
@@ -88,6 +89,7 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .settings-item{

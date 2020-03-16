@@ -12,6 +12,15 @@
        @mouseup="up">
         {{ label.labelText }}
       </p>
+      <img v-for="(sticker,index) in getStickers" :key="index" 
+      :src="sticker.sticker"  
+      :style="{ left: sticker.x, top: sticker.y }"
+      :id="'stickertarget_' + index"
+      class="canvas-element"
+      draggable="false"
+      @mousedown="down(i)"
+      @mouseup="up"
+      />
     </div>
 
   </div>
@@ -25,6 +34,9 @@ export default {
       }
     },
     computed: {
+        getStickers(){
+          return this.$store.state.sticker.stickers
+        },  
         getLabels(){
           return this.$store.state.label.labels
         },
@@ -54,12 +66,20 @@ export default {
           && shiftX > boundaries.left
           && shiftY < boundaries.top
           && shiftY > boundaries.bottom){
+            let id = element.split('_')
             const coords = {
-            index: element.split('_')[1],
+            index: id[1],
             x: shiftX + 'px',
             y: shiftY  + 'px'
             }
-            this.$store.commit('label/sendXYLabel', coords)
+            const l_id = 'labeltarget'
+            const s_id = 'stickertarget'
+            if(id[0] === l_id){
+              this.$store.commit('label/sendXYLabel', coords)
+            }
+            if(id[0] === s_id){
+              this.$store.commit('sticker/sendXYSticker', coords)
+            }
           }else{
             this.allowMove = false
           }
@@ -69,7 +89,7 @@ export default {
         this.respectBoundaries(event, event.target.attributes.id.value)
       },
       down(i){
-        this.respectBoundaries(event, `labeltarget${i}`)
+        this.respectBoundaries(event, event.target.attributes.id.value)
         this.allowMove = true
       },
       up(e){
