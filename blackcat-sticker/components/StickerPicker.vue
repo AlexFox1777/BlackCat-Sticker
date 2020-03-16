@@ -1,13 +1,9 @@
 <template>
 <div class="sticker">
     <div class="row">
-        <!-- Sticker move component -->
-        <div class="movements">
-            d
-        </div>
         <!-- Sticker list component -->
         <div class="sticker-list">
-            <img v-for="(cat, index) in cats"  :src="cat" :key="index" />
+            <img v-for="(cat, index) in cats"  :src="cat" :key="index" @click="sendSticker(cat)" />
         </div>
     </div>
     <!-- Opacity component -->
@@ -22,6 +18,16 @@
 
 <script>
 export default {
+methods: {
+    sendSticker(img){
+        let sticker = {
+            sticker: img,
+            x: '50%',
+            y: '50%',
+        }
+        this.$store.commit('sticker/sendSticker', sticker)
+    },
+},
 data(){
     return{
         imgOpacity: 0.8,
@@ -60,7 +66,7 @@ data(){
 .sticker-list{
     border: 1px solid coral;
     border-radius: 4px;
-    width: 75%;
+    width: 100%;
 
 }
 .row{
@@ -69,10 +75,5 @@ data(){
     width: 100%;
     margin-bottom: 20px;
 }
-// movements styles 
-.movements{
-    width: 20%;
-    border: 1px solid coral;
-    border-radius: 4px;
-}
+
 </style>
