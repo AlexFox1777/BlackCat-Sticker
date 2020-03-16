@@ -7,7 +7,7 @@
        :key="i"
        :id="'labeltarget_' + i"
        class="canvas-element"
-       :style="{ left: label.x, top: label.y}"
+       :style="{ left: label.x, top: label.y, color: label.labelColor, 'font-family': label.labelFont}"
        @mousedown="down(i)"
        @mouseup="up">
         {{ label.labelText }}

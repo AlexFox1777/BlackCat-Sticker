@@ -1,5 +1,5 @@
 <template>
-  <button class="label">
+  <button class="label" @click="sendLabel">
       {{ label }}
   </button>
 </template>
@@ -8,6 +8,11 @@
 export default {
 props:{
     label: String
+},
+methods: {
+    sendLabel(){
+        this.$emit('pick-label')
+    }
 }
 }
 </script>
