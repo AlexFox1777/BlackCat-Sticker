@@ -5,7 +5,8 @@
             <h4 class="title">↓Crop your image↓</h4>
             <img :src="getSrc" class="img" ref="image" @change="setupCropper"/>
         </div>
-        <button @click="sendImg" class="btn">Submit</button>
+        <button @click="sendImg" class="sbm-btn" >Submit</button>
+        <button @click="sendPreview" class="prv-btn">Preview</button>
     </div>
 </transition>
 </template>
@@ -32,6 +33,9 @@ export default {
     methods: {
         sendImg(){
             this.$emit('disable-modal')
+            this.$store.commit('image/sendCroppedImg', this.destination)
+        },
+        sendPreview(){
             this.$store.commit('image/sendCroppedImg', this.destination)
         },
         setupCropper(){
@@ -77,15 +81,30 @@ export default {
     height: auto;
 }
 
-.btn{
+@mixin btn{
     font-size: 1rem;
-    width: 100%;
+    width: 41%;
+    display: inline-block;
     border: none;
-    background: rgb(123, 219, 123);
     outline: none;
     padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.prv-btn{
+    background: rgb(123, 219, 123);
+    @include btn();
     &:hover{
         background: rgb(103, 199, 103); 
+    }
+}
+
+.sbm-btn{
+    background: coral;
+    @include btn();
+    &:hover{
+        background: rgb(255, 97, 40);
     }
 }
 
