@@ -81,9 +81,11 @@ h4{
 svg{
     width: 100px;
     height: auto;
+    padding: 0
 }
+
 svg *{
-    pointer-events: none
+    pointer-events: none;
 }
 </style>
 
