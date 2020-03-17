@@ -10,6 +10,7 @@
        :id="'labeltarget_' + i"
        class="canvas-element"
        :style="{ left: label.x, top: label.y, color: label.labelColor, 'font-family': label.labelFont}"
+       @contextmenu.prevent="deleteLabel(i)"
        @mousedown="down()"
        @mouseup="up">
         {{ label.labelText }}
@@ -18,6 +19,7 @@
         :style="{ left: sticker.x, top: sticker.y, opacity: sticker.imgOpacity}"
         class="canvas-element"
         draggable="false"
+        @contextmenu.prevent="deleteSticker(index)"
         @mousedown="down()"
         @mouseup="up">
         <component :is="sticker.sticker"  :id="'stickertarget_' + index"></component>
@@ -39,6 +41,11 @@ export default {
     data(){
       return{
         allowMove: false,
+        menu: {
+          allow: false,
+          x: 0,
+          y: 0,
+        },
       }
     },
     computed: {
@@ -100,8 +107,14 @@ export default {
         this.respectBoundaries(event, event.target.id)
         this.allowMove = true
       },
-      up(e){
+      up(){
         this.allowMove = false
+      },
+      deleteLabel(index){
+        this.$store.commit('label/deleteLabel', index) 
+      },
+      deleteSticker(index){
+        this.$store.commit('sticker/deleteSticker', index)
       }
     }
 }
@@ -143,5 +156,9 @@ export default {
   cursor: pointer;
   user-select: none;
   position: absolute;
+}
+.context-menu{
+  position: absolute;
+  z-index: 10;
 }
 </style>
