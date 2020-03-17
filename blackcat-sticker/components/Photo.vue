@@ -8,26 +8,33 @@
        :id="'labeltarget_' + i"
        class="canvas-element"
        :style="{ left: label.x, top: label.y, color: label.labelColor, 'font-family': label.labelFont}"
-       @mousedown="down(i)"
+       @mousedown="down()"
        @mouseup="up">
         {{ label.labelText }}
       </p>
-      <img v-for="(sticker,index) in getStickers" :key="index" 
-      :src="sticker.sticker"  
-      :style="{ left: sticker.x, top: sticker.y }"
-      :id="'stickertarget_' + index"
-      class="canvas-element"
-      draggable="false"
-      @mousedown="down(i)"
-      @mouseup="up"
-      />
+      <div v-for="(sticker,index) in getStickers" :key="index + 1" 
+        :style="{ left: sticker.x, top: sticker.y }"
+        class="canvas-element"
+        draggable="false"
+        @mousedown="down()"
+        @mouseup="up">
+        <component :is="sticker.sticker"  :id="'stickertarget_' + index"></component>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+import Happy from './stickers/Happy'
+import Suspicious from './stickers/Suspicious'
+import Toungue from './stickers/Toungue'
 export default {
+  components:{
+    Happy,
+    Suspicious,
+    Toungue
+  },
     data(){
       return{
         allowMove: false,
@@ -86,10 +93,10 @@ export default {
         }
       },
       move(){
-        this.respectBoundaries(event, event.target.attributes.id.value)
+        this.respectBoundaries(event, event.target.id)
       },
-      down(i){
-        this.respectBoundaries(event, event.target.attributes.id.value)
+      down(){
+        this.respectBoundaries(event, event.target.id)
         this.allowMove = true
       },
       up(e){
