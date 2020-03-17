@@ -35,9 +35,11 @@ export default {
             this.modalActive = false
         },
         handleFile(e){
-            let imgSrc = URL.createObjectURL(event.target.files[0]);
-            this.$store.commit('image/handleSrc', imgSrc)
-            this.modalActive = true
+            if(event.target.files[0]){
+                let imgSrc = URL.createObjectURL(event.target.files[0]);
+                this.$store.commit('image/handleSrc', imgSrc)
+                this.modalActive = true
+            }
         },
     },
 }
