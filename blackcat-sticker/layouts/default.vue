@@ -74,5 +74,13 @@ body{
 h4{
   font-weight: normal;
 }
+
+svg{
+    width: 100px;
+    height: auto;
+}
+svg *{
+    pointer-events: none
+}
 </style>
 

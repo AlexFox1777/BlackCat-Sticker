@@ -3,7 +3,9 @@
     <div class="row">
         <!-- Sticker list component -->
         <div class="sticker-list">
-            <img v-for="(cat, index) in cats"  :src="cat" :key="index" @click="sendSticker(cat)" />
+            <div v-for="(cat, index) in cats" :key="index" @click="sendSticker(cat)">
+                <component :is="cat"></component>
+            </div>
         </div>
     </div>
     <!-- Opacity component -->
@@ -17,23 +19,32 @@
 </template>
 
 <script>
+import Happy from './stickers/Happy'
+import Suspicious from './stickers/Suspicious'
+import Toungue from './stickers/Toungue'
 export default {
-methods: {
-    sendSticker(img){
-        let sticker = {
-            sticker: img,
-            x: '50%',
-            y: '50%',
-        }
-        this.$store.commit('sticker/sendSticker', sticker)
+    components:{
+        Happy,
+        Suspicious,
+        Toungue
     },
-},
-data(){
-    return{
-        imgOpacity: 0.8,
-        cats: ['/favicon.ico', '/favicon.ico', '/favicon.ico' ,'/favicon.ico']
+    methods: {
+        sendSticker(img){
+            let sticker = {
+                sticker: img,
+                x: '50%',
+                y: '50%',
+            }
+            this.$store.commit('sticker/sendSticker', sticker)
+        },
+    },
+    data(){
+        return{
+            imgOpacity: 0.8,
+            cats: ['Happy', 'Suspicious', 'Toungue', 'Happy', 'Happy', 'Happy', 'Happy',
+             'Happy']
+        }
     }
-}
 }
 </script>
 
@@ -67,7 +78,11 @@ data(){
     border: 1px solid coral;
     border-radius: 4px;
     width: 100%;
-
+    overflow: scroll;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .row{
     display: flex;
