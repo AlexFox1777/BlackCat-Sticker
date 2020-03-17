@@ -56,7 +56,7 @@ export default {
                     canvas.toBlob(
                     blob => {
                         // sending blob to server functionality here
-                    this.destination = canvas.toDataURL('image/jpeg', 1);
+                        this.destination = canvas.toDataURL('image/jpeg', 1);
                     }, 'image/jpeg', 1);
                 },
             })
