@@ -16,13 +16,13 @@
         {{ label.labelText }}
       </p>
       <div v-for="(sticker,index) in getStickers" :key="index + 1" 
-        :style="{ left: sticker.x, top: sticker.y, opacity: sticker.imgOpacity}"
+        :style="{ left: sticker.x, top: sticker.y, opacity: sticker.imgOpacity, transform: 'rotate(' + sticker.rotation + 'deg' +')'}"
         class="canvas-element"
         draggable="false"
         @contextmenu.prevent="deleteSticker(index)"
         @mousedown="down()"
         @mouseup="up">
-        <component :is="sticker.sticker"  :id="'stickertarget_' + index"></component>
+        <component :is="sticker.sticker" :style="{width: sticker.size}" :id="'stickertarget_' + index" ></component>
       </div>
     </div>
   </div>

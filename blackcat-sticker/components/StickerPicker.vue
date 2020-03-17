@@ -8,11 +8,30 @@
             </div>
         </div>
     </div>
+    <div class="preview">
+        <component :is="'Happy'" 
+            :style="{opacity: this.imgOpacity, width: this.size, transform: 'rotate(' + this.rotation + 'deg)'}" 
+        ></component>
+    </div>
     <!-- Opacity component -->
     <div class="slider-container">
-        <h4>Image Opacity</h4>
+        <h5>Sticker Opacity</h5>
         <div class="slider">
             <input type="range" min="0" v-model="imgOpacity" max="1" step="0.01" name="opacity">
+        </div>
+    </div>
+     <!-- Size component -->
+    <div class="slider-container">
+        <h5>Sticker Size</h5>
+        <div class="slider">
+            <input type="range" min="30" v-model="size" max="150" step="1" name="size">
+        </div>
+    </div>
+    <!-- Rotate component -->
+    <div class="slider-container">
+        <h5>Sticker rotation</h5>
+        <div class="slider">
+            <input type="range" min="0" v-model="rotation" max="360" step="1" name="rotation">
         </div>
     </div>
 </div>
@@ -39,6 +58,8 @@ export default {
                 let sticker = {
                     sticker: img,
                     imgOpacity: this.imgOpacity,
+                    rotation: this.rotation,
+                    size: this.size,
                     x: '50%',
                     y: '50%',
                 }
@@ -52,6 +73,8 @@ export default {
     data(){
         return{
             imgOpacity: 0.8,
+            size: 100,
+            rotation: 0,
             cats: ['Happy', 'Suspicious', 'Toungue', 'Happy', 'Happy', 'Happy', 'Happy',
              'Happy']
         }
@@ -68,6 +91,7 @@ export default {
 .slider-container{
     width: 100%;
     text-align: left;
+    margin-bottom: 10px;
 }
 .slider input[type=range] {
     -webkit-appearance: none;
@@ -100,6 +124,13 @@ export default {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
+}
+.preview{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 </style>
