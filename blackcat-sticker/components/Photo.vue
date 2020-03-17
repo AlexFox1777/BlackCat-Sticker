@@ -157,8 +157,5 @@ export default {
   user-select: none;
   position: absolute;
 }
-.context-menu{
-  position: absolute;
-  z-index: 10;
-}
+
 </style>
