@@ -46,8 +46,18 @@ export default {
                 minCropBoxWidth: 50,
                 aspectRatio: 1,
                 crop: () => {
-                    const canvas = this.cropper.getCroppedCanvas();
-                    this.destination = canvas.toDataURL("image/png");
+                    const canvas = this.cropper.getCroppedCanvas({
+                        maxWidth: 3072,
+                        maxHeight: 3072,
+                        imageSmoothingEnabled: true,
+                        imageSmoothingQuality: 'high',
+                        fillColor: '#fff',
+                    })
+                    canvas.toBlob(
+                    blob => {
+                        // sending blob to server functionality here
+                    this.destination = canvas.toDataURL('image/jpeg', 1);
+                    }, 'image/jpeg', 1);
                 },
             })
         },  
