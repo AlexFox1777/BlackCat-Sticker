@@ -36,7 +36,7 @@ $breakpoint-tablet: 768px;
 }
 
 .container {
-  margin-top: 70px;
+  margin-top: 100px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
