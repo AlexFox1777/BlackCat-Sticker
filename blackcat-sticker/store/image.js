@@ -1,7 +1,7 @@
 
 
 export const state = () => ({
-    imgSrc: "",
+    imgSrc: false,
     croppedImg: "",
 })
 

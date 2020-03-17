@@ -28,6 +28,11 @@ export default {
     components: {
         LabelBtn: Label
     },
+     computed: {
+        getSrc(){
+          return this.$store.state.image.croppedImg
+        },
+    },
     data(){
         return{
             labelText: "EXAMPLE",
@@ -45,14 +50,16 @@ export default {
             this.labelFont = font
         },
         sendLabel(){
-            let label = {
-                labelText: this.labelText,
-                labelFont: this.labelFont,
-                labelColor: this.labelColor,
-                x: '50%',
-                y: '50%',
+            if(this.getSrc.length > 0){
+                let label = {
+                    labelText: this.labelText,
+                    labelFont: this.labelFont,
+                    labelColor: this.labelColor,
+                    x: '50%',
+                    y: '50%',
+                }
+                this.$store.commit('label/sendLabel', label)
             }
-            this.$store.commit('label/sendLabel', label)
         },
     },
 }

@@ -28,14 +28,21 @@ export default {
         Suspicious,
         Toungue
     },
+    computed: {
+        getSrc(){
+          return this.$store.state.image.croppedImg
+        },
+    },
     methods: {
         sendSticker(img){
-            let sticker = {
-                sticker: img,
-                x: '50%',
-                y: '50%',
+            if(this.getSrc.length > 0){
+                let sticker = {
+                    sticker: img,
+                    x: '50%',
+                    y: '50%',
+                }
+                this.$store.commit('sticker/sendSticker', sticker)
             }
-            this.$store.commit('sticker/sendSticker', sticker)
         },
     },
     data(){

@@ -1,7 +1,6 @@
 <template>
   <div class="photo-root">
-    <img :src="getSrc" class="img"/>
-    
+    <img :src="getSrc" class="img" v-if="getSrc"/>
     <div class="canvas" id="labelbox" @mousemove="move">
       <p v-for="(label, i) in getLabels"
        :key="i"
@@ -21,7 +20,6 @@
         <component :is="sticker.sticker"  :id="'stickertarget_' + index"></component>
       </div>
     </div>
-
   </div>
 </template>
 
