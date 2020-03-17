@@ -1,6 +1,9 @@
 <template>
   <div class="photo-root">
     <img :src="getSrc" class="img" v-if="getSrc"/>
+    <div v-else class="upload-img">
+      IMAGE
+    </div>
     <div class="canvas" id="labelbox" @mousemove="move">
       <p v-for="(label, i) in getLabels"
        :key="i"
@@ -118,6 +121,17 @@ export default {
   @include photo-block;
   border-radius: 15px;
   border: 1px solid rgb(250, 191, 170);
+}
+.upload-img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border: 3px dashed burlywood;
+  border-radius: 10px;
+  background: rgb(255, 236, 210);
+  color:rgb(245, 163, 133);
+  font-size: 2rem;
 }
 .canvas{
   @include photo-block;
