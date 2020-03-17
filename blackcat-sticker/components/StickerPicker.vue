@@ -38,12 +38,16 @@ export default {
             if(this.getSrc.length > 0){
                 let sticker = {
                     sticker: img,
+                    imgOpacity: this.imgOpacity,
                     x: '50%',
                     y: '50%',
                 }
                 this.$store.commit('sticker/sendSticker', sticker)
             }
         },
+        handleOpacity(o){
+            this.imgOpacity = o
+        }
     },
     data(){
         return{

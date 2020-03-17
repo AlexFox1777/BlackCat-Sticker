@@ -15,7 +15,7 @@
         {{ label.labelText }}
       </p>
       <div v-for="(sticker,index) in getStickers" :key="index + 1" 
-        :style="{ left: sticker.x, top: sticker.y }"
+        :style="{ left: sticker.x, top: sticker.y, opacity: sticker.imgOpacity}"
         class="canvas-element"
         draggable="false"
         @mousedown="down()"
