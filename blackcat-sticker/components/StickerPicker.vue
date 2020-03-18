@@ -119,6 +119,9 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
 }
+.sticker-list > div{
+    margin: 5px;
+}
 .row{
     display: flex;
     justify-content: space-between;

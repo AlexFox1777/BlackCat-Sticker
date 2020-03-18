@@ -16,5 +16,8 @@ export const mutations = {
         const sticker_obj = state.stickers[index]
         sticker_obj.x = data.x
         sticker_obj.y = data.y
+    },
+    reset(state){
+        state.stickers = []
     }
 }

@@ -16,5 +16,8 @@ export const mutations = {
         const label_obj = state.labels[index]
         label_obj.x = data.x
         label_obj.y = data.y
+    },
+    reset(state){
+        state.labels = []
     }
 }

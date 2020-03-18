@@ -115,7 +115,17 @@ export default {
       },
       deleteSticker(index){
         this.$store.commit('sticker/deleteSticker', index)
+      },
+      deleteAll(){
+        this.$store.commit('sticker/reset')
+        this.$store.commit('label/reset')
       }
+    },
+    mounted(){
+      window.addEventListener('resize', this.deleteAll)
+    },
+    beforeDestroy(){
+      window.removeEventListener('resize', this.deleteAll)
     }
 }
 </script>
